@@ -1,0 +1,8 @@
+.net*
+*.swp
+
+tags
+plugged
+bundle
+autoload
+.*-rplugin~

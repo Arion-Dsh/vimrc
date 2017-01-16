@@ -77,14 +77,15 @@ set mouse=a    " Automatically enable mouse usage
 set mousehide  " Hide the mouse cursor while typing
 
 " Show vertical bar after 100 characters
-set colorcolumn=100
+set colorcolumn=80
 
 " No backup and no swap
 set nobackup
 set noswapfile
 
 " Formatting
-set nowrap " Do not wrap long lines
+set nowrap
+set formatoptions-=t " do not automatically wrap text when typing"
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
@@ -180,7 +181,7 @@ autocmd BufNewFile,BufReadPost *.bundle set filetype=vim
 "=========================================================
 " Key Mappings
 "=========================================================
-map Q gq " Don't use Ex mode, use Q for formatting
+map Q gq
 map <leader>t :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
 map <leader>l :TagbarToggle<CR>

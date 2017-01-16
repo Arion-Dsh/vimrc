@@ -68,6 +68,8 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType html,markdown,xml setlocal omnifunc=htmlcomplete#CompleteTags
 
+Plug 'jiangmiao/auto-pairs'
+
 
 "==============================================================
 "interface
@@ -126,13 +128,14 @@ Plug 'mbbill/undotree'
 nnoremap <Leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle=1
 
-"Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " Syntax checking
 Plug 'scrooloose/syntastic'
 
 " Commenting
 Plug 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims = 1
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -145,13 +148,12 @@ nnoremap <silent> <leader>gp :Git push<CR>
 
 Plug 'majutsushi/tagbar'
 " GO support (https://github.com/jstemmer/gotags)
-nmap <silent> <F2> :TagbarToggle<CR>
+nmap <silent> <leader>tag :TagbarToggle<CR>
 let g:tagbar_width = 24
 
 " Git gutter
+
 Plug 'airblade/vim-gitgutter'
-
-
 
 " Javascript
 Plug 'leafgarland/typescript-vim'
@@ -184,6 +186,20 @@ Plug 'tpope/vim-markdown'
 Plug 'mhinz/vim-startify'
 
 "Plug 'sourcegraph/sourcegraph-vim'
+"
+"
+"=============================================================
+" syntastic check
+" ============================================================
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_go_checkers = ['vet', 'golint', 'goimports']
+let g:syntastic_python_checkers = ['flake8']
+
 
 "=============================================================
 " GO - golang
@@ -198,24 +214,18 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_check_on_wq = 0
 
-let g:syntastic_go_checkers = ['vet', 'golint', 'goimports']
-let g:go_metalinter_enabled = ['vet', 'vetshadow', 'golint','ineffassign', 'goconst', 'structcheck', 'goimports']
+let g:go_metalinter_enabled = ['vet', 'vetshadow', 'golint','ineffassign', 'goimports'] "'goconst'
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_list_type = "quickfix"
 " run golint when saving with :w
-"autocmd BufWritePost,FileWritePost *.go execute 'GoImports' | cwindow
-"autocmd BufWritePost,FileWritePost *.go execute 'GoFmt' | cwindow
-autocmd BufWritePost,FileWritePost *.go execute 'GoMetaLinter' | cwindow
 
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'garyburd/go-explorer'
+"Plug 'AndrewRadev/splitjoin.vim'
+"Plug 'garyburd/go-explorer'
 
 " Present
-Plug 'raphael/vim-present-simple'
+"Plug 'raphael/vim-present-simple'
 
 " FISH'go',
 Plug 'dag/vim-fish'
@@ -227,18 +237,18 @@ autocmd Filetype go set shiftwidth=4
 autocmd Filetype go set tabstop=4
 autocmd Filetype go set noexpandtab
 autocmd Filetype go set nolist " Do not hightlight tabs in go or other things in go, gofmt will clean it all up anyway
-au FileType go nmap <Leader>gs <Plug>(go-implements)
-au FileType go nmap <Leader>gi <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <leader>gr <Plug>(go-referrers)
-au FileType go nmap <leader>gb <Plug>(go-build)
-au FileType go nmap <leader>gt <Plug>(go-test)
-au FileType go nmap <leader>gc <Plug>(go-coverage)
+"au FileType go nmap <Leader>gs <Plug>(go-implements)
+"au FileType go nmap <Leader>gi <Plug>(go-info)
+"au FileType go nmap <Leader>gd <Plug>(go-doc)
+"au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+"au FileType go nmap <leader>gr <Plug>(go-referrers)
+"au FileType go nmap <leader>gb <Plug>(go-build)
+"au FileType go nmap <leader>gt <Plug>(go-test)
+"au FileType go nmap <leader>gc <Plug>(go-coverage)
 "au FileType go nmap <Leader>ds <Plug>(go-def-split)
 "au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 "au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>e <Plug>(go-rename)
+"au FileType go nmap <Leader>e <Plug>(go-rename)
 
 
 " docker file
@@ -248,7 +258,7 @@ Plug 'ekalinin/Dockerfile.vim'
 " python
 "================================
 Plug 'vim-scripts/indentpython.vim'
-Plug 'nvie/vim-flake8'
+" Plug 'nvie/vim-flake8'
 Plug 'vim-autopep8'
 Plug 'davidhalter/jedi-vim'
 
@@ -256,18 +266,22 @@ Plug 'davidhalter/jedi-vim'
 "let g:python3_host_prog  = '/usr/bin/python'
 " Skip the check of neovim module
 " let g:python3_host_skip_check = 1
+" let g:flake8_show_quickfix=0
+" let g:syntastic_disable_python_checker = 1
 
 let g:autopep8_disable_show_diff=1
 let g:autopep8_aggressive=1
 let g:autopep8_ignore="E501,W293"
 " pep8 & flake8 before :w save
 autocmd BufWritePost,FileWritePost *.py execute 'Autopep8 --aggressive --aggressive' | cwindow
-autocmd BufWritePost,FileWritePost *.py execute ':call Flake8()' | cwindow
+" autocmd BufWritePost,FileWritePost *.py execute ':call Flake8()' | cwindow
 
+let g:jedi#completions_enabled = 0
+au fileType python let g:jedi#completions_enabled = 1
 "let g:jedi#auto_initialization = 0
 let g:jedi#init_python = '/usr/bin/python3'
 let g:jedi#force_py_version = 3
-"let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_command = "<leader>d"
 "let g:jedi#goto_assignments_command = "<leader>g"
 "let g:jedi#goto_definitions_command = ""
 "let g:jedi#documentation_command = "K"

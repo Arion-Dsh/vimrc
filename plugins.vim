@@ -197,7 +197,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_go_checkers = ['vet', 'golint', 'goimports']
 let g:syntastic_python_checkers = ['flake8']
 
 
@@ -205,7 +204,7 @@ let g:syntastic_python_checkers = ['flake8']
 " GO - golang
 "=============================================================
 Plug 'fatih/vim-go'
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 0
 let g:go_highlight_functions = 1
@@ -214,12 +213,11 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-"let g:syntastic_check_on_wq = 0
 
-let g:go_metalinter_enabled = ['vet', 'vetshadow', 'golint','ineffassign', 'goimports'] "'goconst'
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_enabled = ['vet', 'deadcode', 'golint', 'ineffassign']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint',  'deadcode', 'ineffassign']
 let g:go_list_type = "quickfix"
-" run golint when saving with :w
 
 "Plug 'AndrewRadev/splitjoin.vim'
 "Plug 'garyburd/go-explorer'

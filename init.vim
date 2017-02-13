@@ -95,10 +95,16 @@ set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
 set nofoldenable
 
 
-au BufNewFile,BufRead *.js, *.html, *.css
-\ set tabstop=2
-\ set softtabstop=2
-\ set shiftwidth=2
+autocmd BufNewFile,BufRead *.js,*.html,*.css
+  \ set tabstop=2 |
+  \ set softtabstop=2 |
+  \ set shiftwidth=2 |
+  \ set expandtab=off
+
+autocmd BufNewFile,BufRead *.yaml,*.yml
+  \ set tabstop=2 |
+  \ set softtabstop=2 |
+  \ set shiftwidth=2
 
 
 " Enable folding

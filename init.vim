@@ -20,12 +20,13 @@ let g:rehash256 = 1
 "colorscheme gruvbox
 "colorscheme monochrome
 if has('gui_running')
-  "colorscheme solarized
+  " colorscheme solarized
   colorscheme molokai
 else
   colorscheme molokai
 endif
 set guioptions-=T " turns off toolbar
+set guioptions-=m
 set vb " turns off visual bell
 set noerrorbells " don't make noise
 au FileType qf setlocal nonumber
@@ -99,7 +100,7 @@ autocmd BufNewFile,BufRead *.js,*.html,*.css
   \ set tabstop=2 |
   \ set softtabstop=2 |
   \ set shiftwidth=2 |
-  \ set expandtab=off
+  \ set noexpandtab
 
 autocmd BufNewFile,BufRead *.yaml,*.yml
   \ set tabstop=2 |
@@ -234,4 +235,18 @@ function! StripTrailingWhitespace()
   " clean up: restore previous search history, and cursor position
   let @/=_s
   call cursor(l, c)
+endfunction
+
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+    if exists(':NeoCompleteLock')==2
+        exe 'NeoCompleteLock'
+    endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+    if exists(':NeoCompleteUnlock')==2
+        exe 'NeoCompleteUnlock'
+    endif
 endfunction

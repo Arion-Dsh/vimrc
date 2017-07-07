@@ -1,4 +1,14 @@
 call plug#begin('~/.vim/bundle')
+
+"""""""""""
+" 'terryma/vim-multiple-cursors'
+"""""""""""
+
+Plug 'terryma/vim-multiple-cursors'
+
+" tpope/vim-surround
+"
+Plug 'tpope/vim-surround'
 "==============================
 "easymotion/vim-easymotion
 "==============================
@@ -14,6 +24,16 @@ map fj <Plug>(easymotion-j)
 map fk <Plug>(easymotion-k)
 map fh <Plug>(easymotion-linebackward)
 let g:EasyMotion_smartcase = 1
+
+" Gif config
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+"
+" " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" " Without these mappings, `n` & `N` works fine. (These mappings just provide
+" " different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)")
 
 "==============================
 " complete
@@ -257,22 +277,15 @@ Plug 'ekalinin/Dockerfile.vim'
 "================================
 Plug 'vim-scripts/indentpython.vim'
 " Plug 'nvie/vim-flake8'
-Plug 'vim-autopep8'
 Plug 'davidhalter/jedi-vim'
+Plug 'Chiel92/vim-autoformat'
 
 " Path to python interpreter for vim
-"let g:python3_host_prog  = '/usr/bin/python'
-" Skip the check of neovim module
-" let g:python3_host_skip_check = 1
-" let g:flake8_show_quickfix=0
-" let g:syntastic_disable_python_checker = 1
 
-let g:autopep8_disable_show_diff=1
-let g:autopep8_aggressive=1
-let g:autopep8_ignore="E501,W293"
 " pep8 & flake8 before :w save
-autocmd BufWritePost,FileWritePost *.py execute 'Autopep8 --aggressive --aggressive' | cwindow
+autocmd BufWritePost,FileWritePost *.py execute 'Autoformat' | cwindow
 " autocmd BufWritePost,FileWritePost *.py execute ':call Flake8()' | cwindow
+let g:formatter_yapf_style = 'google'
 
 let g:jedi#completions_enabled = 0
 au fileType python let g:jedi#completions_enabled = 1

@@ -1,3 +1,4 @@
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -7,7 +8,7 @@ let mapleader="\<Space>"
 
 
 " Use system clipboard
-set clipboard+=unnamedplus
+set clipboard=unnamed
 
 " Plugins
 source ~/.vim/plugins.vim

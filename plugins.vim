@@ -116,7 +116,9 @@ let g:gruvbox_italic=1
 "Plug 'jnurmine/Zenburn'
 Plug 'fatih/molokai'
 Plug 'altercation/vim-colors-solarized'
+let g:rehash256 = 1
 let g:molokai_original = 1
+
 
 "=================================================
 " General
@@ -234,10 +236,10 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-let g:go_metalinter_enabled = ['vet', 'deadcode', 'golint', 'ineffassign']
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint',  'deadcode', 'ineffassign']
-let g:go_list_type = "quickfix"
+"let g:go_metalinter_autosave_enabled = ['vet', 'golint',  'errcheck', 'deadcode', 'ineffassign']
+"let g:go_list_type = 'quickfix'
 
 "Plug 'AndrewRadev/splitjoin.vim'
 "Plug 'garyburd/go-explorer'

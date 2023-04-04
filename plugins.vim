@@ -35,49 +35,45 @@ omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)")
 
+
+"===============
+"rust 
+"====================
+Plug 'rust-lang/rust.vim'
+
+let g:rust_clip_command = 'xclip -selection clipboard'
+
+Plug 'prabirshrestha/vim-lsp'
+
+
 "==============================
 " complete
 "==============================
 
-" neocomplete
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py'  }
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
+let g:ycm_use_clangd = 0
+let g:ycm_add_preview_to_completeopt=0
+let g:ycm_max_num_candidates=50
+let g:ycm_gopls_binary_path = "gopls"
+let g:ycm_gopls_args = ['-remote=auto']
+" let g:ycm_rust_toolchain_root = $HOME.'/.rustup/toolchains/stable-x86_64-apple-darwin'
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_key_list_stop_completion = ['<C-y>']
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME.'/.vim/MySnippets']
+let g:ycm_show_diagnostics_ui = 1
+"
+nnoremap <silent>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <silent>gr :YcmCompleter GoToReferences<CR>
+nnoremap <silent>gi :YcmCompleter GoToImplementation<CR>
 
-Plug 'Shougo/neocomplete'
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#completions_command = "<C-n>"
-
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-"let g:neocomplete#max_list=15
+nmap <leader>D <plug>(YCMHover)
 
 
-"Plug 'SirVer/ultisnips'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-" Enable snipMate compatibility feature.
-"let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/snippets'
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \     "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
 
 " Auto-completion
 set completeopt-=preview " Remove annoying scratch window on completion
@@ -207,6 +203,12 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-markdown'
 Plug 'mhinz/vim-startify'
 
+
+
+Plug 'dense-analysis/ale'
+let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_completion_enabled = 1
+
 "Plug 'sourcegraph/sourcegraph-vim'
 "
 "
@@ -226,6 +228,7 @@ let g:syntastic_python_checkers = ['flake8']
 " GO - golang
 "=============================================================
 Plug 'fatih/vim-go'
+
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 0
